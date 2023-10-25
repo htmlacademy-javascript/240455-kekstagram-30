@@ -1,11 +1,11 @@
+// проверка длины
 function checkLength (string, maxLength) {
   return string.length <= maxLength;
 }
 
 checkLength('проверяемая строка', 20);
-checkLength('проверяемая строка', 18);
-checkLength('проверяемая строка', 10);
 
+//проверка на палиндром
 function isPalindrom(string) {
   string = string.replaceAll(' ','').toLowerCase();
   let newString = '';
@@ -20,6 +20,7 @@ function isPalindrom(string) {
 
 isPalindrom('Лёша на полке клопа нашёл ');
 
+//извлечение чисел из строки
 function getNumber (string) {
 
   let result = '';
@@ -41,10 +42,3 @@ function getNumber (string) {
 }
 
 getNumber('2023 год');
-getNumber('ECMAScript 2022');
-getNumber('1 кефир, 0.5 батона');
-getNumber('агент 007');
-getNumber('а я томат');
-getNumber(2023);
-getNumber(-1);
-getNumber(1.5);
