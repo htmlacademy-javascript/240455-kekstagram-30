@@ -1,6 +1,6 @@
 import './util.js';
 import {Photos} from './data.js';
-import './previews.js';
+import {createPreviews} from './previews.js';
 
-Photos();
-
+const pictures = Photos();
+createPreviews(pictures);

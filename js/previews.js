@@ -1,20 +1,26 @@
 import {Photos} from './data.js';
 
-const pictureTemplate = document.querySelector('#picture');
-const picture = pictureTemplate.content.querySelector('.picture');
+const pictureTemplate = document.querySelector('#picture').content.querySelector('.picture');
 const picturesBox = document.querySelector('.pictures');
-const photosElements = Photos();
+const previews = Photos();
 
-const photosListFragment = document.createDocumentFragment();
+const previewsListFragment = document.createDocumentFragment();
 
-photosElements.forEach((photo) => {
-  const photoElement = picture.cloneNode(true);
-  photoElement.querySelector('.picture__img').src = photo.url;
-  photoElement.querySelector('.picture__img').alt = photo.description;
-  photoElement.querySelector('.picture__likes').textContent = photo.likes;
-  photoElement.querySelector('.picture__comments').textContent = photo.comments.length;
+const createPreview = ({url, description, likes, comments}) => {
+  const preview = pictureTemplate.cloneNode(true);
+  preview.querySelector('.picture__img').src = url;
+  preview.querySelector('.picture__img').alt = description;
+  preview.querySelector('.picture__likes').textContent = likes;
+  preview.querySelector('.picture__comments').textContent = comments.length;
+  return preview;
+};
 
-  photosListFragment.appendChild(photoElement);
-});
+const createPreviews = (pictures) => {
+  previews.forEach((picture) => {
+    const preview = createPreview(picture);
+    previewsListFragment.append(preview);
+  });
+  picturesBox.append(previewsListFragment);
+};
 
-picturesBox.appendChild(photosListFragment);
+export {createPreviews};
