@@ -55,7 +55,6 @@ function getRandomInteger (min, max) {
 //Создание неповторяющегося id
 function createRandomIdFromRangeGenerator (min, max) {
   const previousValues = [];
-
   return function () {
     let currentValue = getRandomInteger(min, max);
     if (previousValues.length >= (max - min + 1)) {
