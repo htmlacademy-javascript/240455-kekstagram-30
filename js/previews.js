@@ -1,8 +1,5 @@
-import {Photos} from './data.js';
-
 const pictureTemplate = document.querySelector('#picture').content.querySelector('.picture');
 const picturesBox = document.querySelector('.pictures');
-const previews = Photos();
 
 const previewsListFragment = document.createDocumentFragment();
 
@@ -15,7 +12,7 @@ const createPreview = ({url, description, likes, comments}) => {
   return preview;
 };
 
-const createPreviews = (pictures) => {
+const createPreviews = (previews) => {
   previews.forEach((picture) => {
     const preview = createPreview(picture);
     previewsListFragment.append(preview);
