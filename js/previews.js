@@ -1,3 +1,6 @@
+import './imagefull.js';
+import {createFullImage} from './imagefull.js';
+
 const pictureTemplate = document.querySelector('#picture').content.querySelector('.picture');
 const picturesBox = document.querySelector('.pictures');
 
@@ -12,9 +15,13 @@ const createPreview = ({url, description, likes, comments}) => {
   return preview;
 };
 
-const createPreviews = (previews) => {
-  previews.forEach((picture) => {
+const createPreviews = (pictures) => {
+  pictures.forEach((picture) => {
     const preview = createPreview(picture);
+    const fullPicture = createFullImage(picture);
+    console.log(fullPicture);
+    preview.append(fullPicture);
+
     previewsListFragment.append(preview);
   });
   picturesBox.append(previewsListFragment);

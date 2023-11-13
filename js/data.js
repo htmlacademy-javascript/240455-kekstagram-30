@@ -1,9 +1,10 @@
-import {createRandomIdFromRangeGenerator, getRandomArrayElement, getRandomInteger} from './util.js';
+import {createIdGenerator, getRandomArrayElement, getRandomInteger} from './util.js';
 
 const PHOTOS_COUNT = 25;
 const COMMENTS_COUNT = 30;
 const LIKES_COUNT_MIN = 15;
 const LIKES_COUNT_MAX = 200;
+const AVATAR_COUNT = 6;
 
 const NAMES = [
   'Иван',
@@ -32,10 +33,9 @@ const DESCRIPTIONS = [
   'Горизонт не завален',
 ];
 
-const generatePhotoId = createRandomIdFromRangeGenerator(1, PHOTOS_COUNT);
-const generatePhotoUrl = createRandomIdFromRangeGenerator(1, PHOTOS_COUNT);
-const generateCommentId = createRandomIdFromRangeGenerator(1, COMMENTS_COUNT);
-const generateCommentAvatar = createRandomIdFromRangeGenerator(1, PHOTOS_COUNT);
+const generatePhotoId = createIdGenerator();
+const generatePhotoUrl = createIdGenerator();
+const generateCommentId = createIdGenerator();
 
 const createMessage = () => Array.from(
   { length: getRandomInteger (1, 2)},
@@ -44,7 +44,7 @@ const createMessage = () => Array.from(
 
 const createComment = () => ({
   id: generateCommentId(),
-  avatar: `img/avatar-${ generateCommentAvatar() }.svg`,
+  avatar: `img/avatar-${ getRandomInteger(1, AVATAR_COUNT)}.svg`,
   message: createMessage(),
   name: getRandomArrayElement(NAMES),
 });

@@ -3,4 +3,13 @@ import {Photos} from './data.js';
 import {createPreviews} from './previews.js';
 
 const pictures = Photos();
-createPreviews(pictures);
+createPreviews(pictures); //const previews
+
+// previews.forEach((preview) => {
+//   preview.addEventListener('click', (evt) => {
+//     evt.preventDefault();
+//     openFullImage(preview);
+//   });
+// });
+
+
