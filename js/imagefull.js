@@ -1,10 +1,6 @@
 import {isEscapeKey, isEnterKey} from './util.js';
 
 const bigPicture = document.querySelector('.big-picture');
-const pictureFooter = bigPicture.querySelector('.social__footer');
-const commentsContainer = document.querySelector('.social__comments');
-const commentsContainerTemplate = commentsContainer.cloneNode(false);
-const commentTemplate = commentsContainer.querySelector('.social__comment');
 const bigPictureCloseElement = bigPicture.querySelector('#picture-cancel');
 
 //Заполнение полной версии картинки данными
@@ -17,38 +13,31 @@ const fillFullImage = ({url, description, likes, comments}) => {
   bigPictureTemplate.querySelector('.social__comment-total-count').textContent = comments.length;
   bigPictureTemplate.querySelector('.social__comment-count').classList.add('hidden');
   bigPictureTemplate.querySelector('.comments-loader').classList.add('hidden');
+  return bigPictureTemplate;
 };
 
-//Добавление комментариев к картинке
+//Добавление комментариев
+const commentsContainer = document.querySelector('.social__comments'); //блок комментариев
+const commentTemplate = commentsContainer.querySelector('.social__comment'); //комментарий
+
 const createComments = ({comments}) => {
-  commentsContainer.remove();
+  const commentsContainerClone = commentsContainer.cloneNode(false);
   comments.forEach(({avatar, name, message}) => {
-    const newComment = commentTemplate.cloneNode(true);
-
-    newComment.querySelector('.social__picture').src = avatar;
-    newComment.querySelector('.social__picture').alt = name;
-    newComment.querySelector('.social__text').textContent = message;
-    commentsContainerTemplate.append(newComment);
+    const commentTemplateClone = commentTemplate.cloneNode(true);
+    commentTemplateClone.querySelector('.social__picture').src = avatar;
+    commentTemplateClone.querySelector('.social__picture').alt = name;
+    commentTemplateClone.querySelector('.social__text').textContent = message;
+    commentsContainerClone.append(commentTemplateClone);
   });
-  pictureFooter.before(commentsContainerTemplate);
+  return commentsContainerClone;
 };
-
-//Создание полной версии картинки
-const createFullImage = (picture) => {
-  // pictures.forEach((picture) => {
-  fillFullImage(picture);
-  //createComments(picture);
-  // });
-};
+commentsContainer.remove(); //удаление заверстанного блока с комментариями
+bigPicture.remove(); //удалена заверстанная полноэкранная картинка
 
 //Открытие полной версии картинки
-const openFullImage = (preview) => {
-  // preview.addEventListener('click', (evt) => {
-  // evt.preventDefault();
-  bigPicture.classList.remove('hidden');
+const openFullImage = (fullPicture) => {
+  fullPicture.classList.remove('hidden');
   document.body.classList.add('modal-open');
-  // });
-  // createFullImage(picture);
 };
 
 const onDocumentKeydown = (evt) => {
@@ -58,16 +47,13 @@ const onDocumentKeydown = (evt) => {
   }
 };
 
-function closeBigPicture () {
+//Закрытие полной версии картинки
+function closeBigPicture (fullPicture) {
   document.body.classList.remove('modal-open');
-  bigPicture.classList.add('hidden');
+  fullPicture.classList.add('hidden');
 
   document.removeEventListener('keydown', onDocumentKeydown);
 }
-
-bigPictureCloseElement.addEventListener('click', () => {
-  closeBigPicture();
-});
 
 bigPictureCloseElement.addEventListener('keydown', (evt) => {
   if (isEnterKey(evt)) {
@@ -75,5 +61,5 @@ bigPictureCloseElement.addEventListener('keydown', (evt) => {
   }
 });
 
-export {createFullImage};
+export {fillFullImage, createComments, openFullImage, closeBigPicture};
 

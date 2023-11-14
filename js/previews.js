@@ -1,5 +1,5 @@
 import './imagefull.js';
-import {createFullImage} from './imagefull.js';
+import {fillFullImage, createComments, openFullImage, closeBigPicture} from './imagefull.js';
 
 const pictureTemplate = document.querySelector('#picture').content.querySelector('.picture');
 const picturesBox = document.querySelector('.pictures');
@@ -17,12 +17,30 @@ const createPreview = ({url, description, likes, comments}) => {
 
 const createPreviews = (pictures) => {
   pictures.forEach((picture) => {
-    const preview = createPreview(picture);
-    const fullPicture = createFullImage(picture);
-    console.log(fullPicture);
-    preview.append(fullPicture);
+    const preview = createPreview(picture); //создано превью
+    const fullPicture = fillFullImage(picture); //создана полная версия картинки
+    const comments = createComments(picture); //созданы комментарии
+    const main = document.querySelector('main');
+    const fullPictureCloseElement = fullPicture.querySelector('#picture-cancel');
 
+    if (picture.comments.length > 0) {
+      const commentsLoader = fullPicture.querySelector('.social__comments-loader');
+      commentsLoader.insertAdjacentElement('afterend', comments);
+    }
+
+    main.append(fullPicture);
     previewsListFragment.append(preview);
+
+    //открытие полноразмерной картинки
+    preview.addEventListener('click', (evt) => {
+      evt.preventDefault();
+      openFullImage(fullPicture);
+    });
+
+    //закрытие полноразмерной картинки
+    fullPictureCloseElement.addEventListener('click', () => {
+      closeBigPicture(fullPicture);
+    });
   });
   picturesBox.append(previewsListFragment);
 };
