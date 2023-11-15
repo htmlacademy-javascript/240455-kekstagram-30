@@ -68,7 +68,4 @@ const getRandomArrayElement = (elements) => elements[getRandomInteger(0, element
 //Проверка нажатия клавиши Esc
 const isEscapeKey = (evt) => evt.key === 'Escape';
 
-//Проверка нажатия клавиши Enter
-const isEnterKey = (evt) => evt.key === 'Enter';
-
-export {createIdGenerator, getRandomArrayElement, getRandomInteger, isEscapeKey, isEnterKey};
+export {createIdGenerator, getRandomArrayElement, getRandomInteger, isEscapeKey};

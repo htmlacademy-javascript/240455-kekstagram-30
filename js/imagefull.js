@@ -1,7 +1,4 @@
-import {isEscapeKey, isEnterKey} from './util.js';
-
 const bigPicture = document.querySelector('.big-picture');
-const bigPictureCloseElement = bigPicture.querySelector('#picture-cancel');
 
 //Заполнение полной версии картинки данными
 const fillFullImage = ({url, description, likes, comments}) => {
@@ -34,32 +31,5 @@ const createComments = ({comments}) => {
 commentsContainer.remove(); //удаление заверстанного блока с комментариями
 bigPicture.remove(); //удалена заверстанная полноэкранная картинка
 
-//Открытие полной версии картинки
-const openFullImage = (fullPicture) => {
-  fullPicture.classList.remove('hidden');
-  document.body.classList.add('modal-open');
-};
-
-const onDocumentKeydown = (evt) => {
-  if (isEscapeKey(evt)) {
-    evt.preventDefault();
-    closeBigPicture();
-  }
-};
-
-//Закрытие полной версии картинки
-function closeBigPicture (fullPicture) {
-  document.body.classList.remove('modal-open');
-  fullPicture.classList.add('hidden');
-
-  document.removeEventListener('keydown', onDocumentKeydown);
-}
-
-bigPictureCloseElement.addEventListener('keydown', (evt) => {
-  if (isEnterKey(evt)) {
-    closeBigPicture();
-  }
-});
-
-export {fillFullImage, createComments, openFullImage, closeBigPicture};
+export {fillFullImage, createComments};
 
