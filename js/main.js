@@ -4,7 +4,3 @@ import {createPreviews} from './previews.js';
 
 const pictures = Photos();
 createPreviews(pictures);
-
-
-
-
