@@ -52,23 +52,20 @@ function getRandomInteger (min, max) {
   return Math.floor(result);
 }
 
-//Создание неповторяющегося id
-function createRandomIdFromRangeGenerator (min, max) {
-  const previousValues = [];
-  return function () {
-    let currentValue = getRandomInteger(min, max);
-    if (previousValues.length >= (max - min + 1)) {
-      return null;
-    }
-    while (previousValues.includes(currentValue)) {
-      currentValue = getRandomInteger(min, max);
-    }
-    previousValues.push(currentValue);
-    return currentValue;
+//Создание счетчика
+const createIdGenerator = () => {
+  let lastGenerateId = 0;
+
+  return () => {
+    lastGenerateId += 1;
+    return lastGenerateId;
   };
-}
+};
 
 //Получение случайного элемента массива
 const getRandomArrayElement = (elements) => elements[getRandomInteger(0, elements.length - 1)];
 
-export {createRandomIdFromRangeGenerator, getRandomArrayElement, getRandomInteger};
+//Проверка нажатия клавиши Esc
+const isEscapeKey = (evt) => evt.key === 'Escape';
+
+export {createIdGenerator, getRandomArrayElement, getRandomInteger, isEscapeKey};
