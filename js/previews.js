@@ -1,8 +1,4 @@
-// import './imagefull.js';
-// import {fillFullImage, createComments} from './imagefull.js';
-
 const pictureTemplate = document.querySelector('#picture').content.querySelector('.picture');
-//const picturesBox = document.querySelector('.pictures');
 
 const previewsListFragment = document.createDocumentFragment();
 
