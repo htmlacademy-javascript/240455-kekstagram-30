@@ -1,6 +1,7 @@
-import './util.js';
 import {Photos} from './data.js';
-import {createPreviews} from './previews.js';
+import {renderGallery} from './imagefull.js';
 
 const pictures = Photos();
-createPreviews(pictures);
+renderGallery(pictures);
+
+
