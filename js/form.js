@@ -1,3 +1,9 @@
+import {resetScale} from './scale.js';
+import {
+  init as initEffect,
+  reset as resetEffect
+} from './effect.js';
+
 const MAX_HASHTAG_COUNT = 5;
 const VALID_SYMBOLS = /^#[a-zа-яё0-9]{1,19}$/i;
 const ErrorText = {
@@ -32,6 +38,8 @@ const hideModal = () => {
   overlay.classList.add('hidden');
   body.classList.remove('modal-open');
   document.removeEventListener('keydown', onDocumentKeydown);
+  resetEffect();
+  resetScale();
 };
 
 const isTextFieldFocused = () =>
@@ -99,3 +107,4 @@ pristine.addValidator(
 fileField.addEventListener('change', onFileInputChange);
 cancelButton.addEventListener('click', onCancelButtonClick);
 form.addEventListener('submit', onFormSubmit);
+initEffect();
