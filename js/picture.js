@@ -71,6 +71,7 @@ closeButton.addEventListener('click', (evt) => {
 const showFullImage = (pictureData) => {
   bigPicture.classList.remove('hidden');
   document.body.classList.add('modal-open');
+  document.addEventListener('keydown', onDocumentKeydown);
 
   comments = pictureData.comments;
   if (comments.length > 0) {
