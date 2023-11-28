@@ -15,7 +15,6 @@ const ErrorText = {
   NOT_UNIQUE: 'Хэштеги должны быть уникальными',
   INVALID_PATTERN: 'Неправильный хэштег',
 };
-
 const submitButtonCaption = {
   SUBMITTING: 'Отправляю...',
   IDLE: 'Опубликовать',
