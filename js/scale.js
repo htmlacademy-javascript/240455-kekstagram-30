@@ -22,7 +22,7 @@ const onSmallerButtonClick = () => {
 
 const onBiggerButtonClick = () => {
   scaleImage(
-    Math.min(parseInt(scaleInputElement.value, 10) - SCALE_STEP, MAX_SCALE)
+    Math.min(parseInt(scaleInputElement.value, 10) + SCALE_STEP, MAX_SCALE)
   );
 };
 
