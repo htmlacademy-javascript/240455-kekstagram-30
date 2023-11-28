@@ -15,21 +15,9 @@ const FilterEnum = {
   DISCUSSED: 'discussed',
 };
 
-const getRandomIndex = (min, max) => Math.floor(Math.random() * (max - min));
-
 const filterHandlers = {
   [FilterEnum.DEFAULT]: (data) => data,
-  [FilterEnum.RANDOM]: (data) => {
-    const randomIndexList = [];
-    const max = Math.min(MAX_RANDOM_FILTER, data.length);
-    while(randomIndexList.length < max) {
-      const index = getRandomIndex(0, data.length);
-      if(!randomIndexList.includes(index)) {
-        randomIndexList.push(index);
-      }
-    }
-    return randomIndexList.map((index) => data[index]);
-  },
+  [FilterEnum.RANDOM]: (data) => [...data].sort(() => 0.5 - Math.random()).slice(0, MAX_RANDOM_FILTER),
   [FilterEnum.DISCUSSED]: (data) => [...data].sort((item1, item2) => item2.comments.length - item1.comments.length),
 };
 
