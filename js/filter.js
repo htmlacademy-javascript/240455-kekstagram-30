@@ -26,6 +26,9 @@ const repaint = (evt, filter, data) => {
   const pictures = document.querySelectorAll('.picture');
   pictures.forEach((item) => item.remove());
   renderGallery(filteredData);
+};
+
+const activateFilterBtn = (evt) => {
   const currentActiveEl = filtersForm.querySelector('.img-filters__button--active');
   currentActiveEl.classList.remove('img-filters__button--active');
   evt.target.classList.add('img-filters__button--active');
@@ -37,11 +40,14 @@ export const initFilter = (data) => {
   filtersEl.classList.remove('img-filters--inactive');
   defaultBtn.addEventListener('click', (evt) => {
     debouncedRepaint(evt, FilterEnum.DEFAULT, data);
+    activateFilterBtn(evt);
   });
   randomBtn.addEventListener('click', (evt) => {
     debouncedRepaint(evt, FilterEnum.RANDOM, data);
+    activateFilterBtn(evt);
   });
   discussedBtn.addEventListener('click', (evt) => {
     debouncedRepaint(evt, FilterEnum.DISCUSSED, data);
+    activateFilterBtn(evt);
   });
 };
