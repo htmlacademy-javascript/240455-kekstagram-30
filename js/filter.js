@@ -22,9 +22,6 @@ const filterHandlers = {
 };
 
 const repaint = (evt, filter, data) => {
-  // const currentActiveEl = filtersForm.querySelector('.img-filters__button--active');
-  // currentActiveEl.classList.remove('img-filters__button--active');
-  // evt.target.classList.add('img-filters__button--active');
   const filteredData = filterHandlers[filter](data);
   const pictures = document.querySelectorAll('.picture');
   pictures.forEach((item) => item.remove());
