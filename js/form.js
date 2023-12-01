@@ -10,12 +10,12 @@ import { isEscapeKey } from './util.js';
 const MAX_HASHTAG_COUNT = 5;
 const VALID_SYMBOLS = /^#[a-zа-яё0-9]{1,19}$/i;
 const FILE_TYPES = ['jpg', 'jpeg', 'png'];
-const ErrorText = {
+const ERROR_TEXT = {
   INVALID_COUNT: `Максимум ${MAX_HASHTAG_COUNT} хэштегов`,
   NOT_UNIQUE: 'Хэштеги должны быть уникальными',
   INVALID_PATTERN: 'Неправильный хэштег',
 };
-const submitButtonCaption = {
+const SUBMIT_BUTTON_CAPTION = {
   SUBMITTING: 'Отправляю...',
   IDLE: 'Опубликовать',
 };
@@ -34,8 +34,8 @@ const effectsPreviews = form.querySelectorAll('.effects__preview');
 function toggleSubmitButton (isDisabled) {
   submitButton.disabled = isDisabled;
   submitButton.textContent = isDisabled
-    ? submitButtonCaption.SUBMITTING
-    : submitButtonCaption.IDLE;
+    ? SUBMIT_BUTTON_CAPTION.SUBMITTING
+    : SUBMIT_BUTTON_CAPTION.IDLE;
 }
 
 const pristine = new Pristine(form, {
@@ -135,7 +135,7 @@ const onFormSubmit = async (evt) => {
 pristine.addValidator(
   hashtagField,
   hasValidCount,
-  ErrorText.INVALID_COUNT,
+  ERROR_TEXT.INVALID_COUNT,
   3,
   true
 );
@@ -143,7 +143,7 @@ pristine.addValidator(
 pristine.addValidator(
   hashtagField,
   hasUniqueTags,
-  ErrorText.NOT_UNIQUE,
+  ERROR_TEXT.NOT_UNIQUE,
   2,
   true
 );
@@ -151,7 +151,7 @@ pristine.addValidator(
 pristine.addValidator(
   hashtagField,
   hasValidTags,
-  ErrorText.INVALID_PATTERN,
+  ERROR_TEXT.INVALID_PATTERN,
   1,
   true
 );
